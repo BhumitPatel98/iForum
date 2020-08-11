@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateChannelRequest;
 use Illuminate\Contracts\Session\Session as SessionSession;
 use Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ChannelsController extends Controller
 {
@@ -42,7 +43,9 @@ class ChannelsController extends Controller
        //dd($request->title);
         Channel::create([
 
-            'title' => $request->title
+            'title' => $request->title,
+ 
+            'slug' => Str::slug($request->title)
 
         ]);
 
@@ -89,6 +92,8 @@ class ChannelsController extends Controller
             $data = request()->all();
 
             $channel->title = $data['title'];
+
+            $channel->slug = $data['title'];
 
             $channel->save();
 

@@ -5,8 +5,7 @@
 @foreach ($discussions as $discussion)
 
 
-  
-        <div class="card  mb-4">
+        <div class="card mb-4">
             <div class="card-header">   
 
                 <img width="40px" height="40px" style="border-radius:50px" src=" {{ Gravatar::src($discussion->email) }}" alt=""> &nbsp;&nbsp;&nbsp;
@@ -34,12 +33,11 @@
 
                     <a href="{{ route('channel',['slug' => $discussion->channel->slug ]) }}" class="btn btn-outline-secondary btn-sm float-right">{{ $discussion->channel->title }}</a>
                 </span>
-                
-               
-               
+
             </div>
         </div>
-    
+        
+
     
 @endforeach
 

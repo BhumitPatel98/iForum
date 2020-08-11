@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Discussion;
 use App\Http\Requests\CreateDiscussionRequest;
+use App\Notifications\NewReplyAdded;
 use App\User;
 use App\Reply;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Symfony\Component\VarDumper\Caster\RedisCaster;
+use Symfony\Component\VarDumper\Server\DumpServer;
 
 class DiscussionsController extends Controller
 {
@@ -74,9 +78,13 @@ class DiscussionsController extends Controller
      */
     public function show($slug)
     {
-      
+      $discussion = Discussion::where('slug',$slug)->first();
 
-       return view('discussion.show',)->with('discussion',Discussion::where('slug',$slug)->first());
+      $best_answer = $discussion->replies()->where('best_answer',1)->first();
+        // dd($best_answer);
+       return view('discussion.show',)
+                        ->with('discussion',$discussion)
+                        ->with('best_answer',$best_answer);
     }
 
     /**
@@ -105,14 +113,31 @@ class DiscussionsController extends Controller
     public function reply($id)
     {
 
-    
-        Reply::create([
+        $reply = Reply::create([
 
             'user_id' => Auth::id(),
             'discussion_id' => $id,
             'content' => request()->reply
 
         ]);
+
+        $reply->user->points += 25;
+        $reply->user->save();
+
+        $watchers = array();
+
+        $discussion = Discussion::find($id);
+
+        foreach($discussion->watchers as $watcher):
+
+            array_push($watchers,User::find($watcher->user_id));
+
+        endforeach;
+
+        //dd($watchers);
+
+        Notification::send($watchers, new \App\Notifications\NewReplyAdded($discussion));
+        
 
         Session()->flash('success','Replied to Discussion');
 
