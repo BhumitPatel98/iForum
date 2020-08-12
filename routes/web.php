@@ -39,6 +39,10 @@ Route::group(['middleware' => ['auth']], function() {
     
     Route::get('discussion/{slug}','DiscussionsController@show')->name('discussion');
 
+    Route::get('discussion/edit/{slug}','DiscussionsController@edit')->name('discussion.edit');
+
+    Route::post('discussion/update/{id}','DiscussionsController@update')->name('discussion.update');
+
     Route::post('discussion/reply/{id}','DiscussionsController@reply')->name('discussion.reply');
 
     Route::get('/reply/like/{id}','RepliesController@like')->name('reply.like');
@@ -52,6 +56,10 @@ Route::group(['middleware' => ['auth']], function() {
     route::get('/discussion/unwatch/{id}','WatchersController@unwatch')->name('discussion.unwatch');
 
     route::get('discussion/best/reply/{id}','RepliesController@best_reply')->name('discussion.best.answer');
+
+    route::get('reply/edit/{id}','RepliesController@edit')->name('reply.edit');
+
+    route::post('reply/update/{id}','RepliesController@update')->name('reply.update');
 });
 
 

@@ -10,7 +10,6 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +17,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/atom-one-dark.min.css">
+
+    
 </head>
 <body>
     <div id="app">
@@ -72,16 +76,25 @@
             </div>
         </nav>
 
-       
-       
+        @if ($errors->count() > 0)
+            <div class="alert alert-danger">
+                <ul class="list-group-item">
+                    @foreach ($errors->all() as $error)
+
+                        <li class="list-group-item text-danger">
+                            {{ $error }}
+                        </li>
+                        
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <main class="container py-4">
 
-            
-
             <div class="row">
 
-                @auth
+                {{-- @auth
                 <div class="container">
 
                     @if (session()->has('success'))
@@ -100,7 +113,7 @@
 
                 </div>
 
-            @endauth
+            @endauth --}}
 
                 <div class="col-4">
 
@@ -108,18 +121,73 @@
                     <div class="panel panel-default">
                         <div class="card my-1" >
                              
-                              <ul class="list-group">
-                                
-                                <li class="list-group-item">
-                                  <strong> 
-                                      <a href="\forum" style="text-decoration: none">
-                                     <div class="text-center">Home</div>
-                                    </a>
-                                </strong> 
-                                </li>
+                            <div class="card-body">
 
-                              </ul>
-                            
+                                <ul class="list-group">
+                                
+                                    <li class="list-group-item">
+                                      <strong> 
+                                        <a href="\forum" style="text-decoration: none">
+                                         <div class="text-center">Home</div>
+                                        </a>
+                                    </strong> 
+                                    </li>
+    
+                                    <li class="list-group-item">
+                                        <strong>
+                                            <a href="\forum?filter=me" style="text-decoration: none">
+                                                <div class="text-center">My Discussion</div>
+                                            </a>
+                                        </strong>
+                                    </li>
+    
+                                    <li class="list-group-item">
+                                        <strong>
+                                            <a href="\forum?filter=solved" style="text-decoration: none">
+                                                <div class="text-center">Answered Discussion</div>
+                                            </a>
+                                        </strong>
+                                    </li>
+    
+                                    <li class="list-group-item">
+                                        <strong>
+                                            <a href="\forum?filter=unsolved" style="text-decoration: none">
+                                                <div class="text-center">UnAnswered Discussion</div>
+                                            </a>
+                                        </strong>
+                                    </li>
+    
+                                  </ul>
+                                
+
+                            </div>
+
+                            @if (Auth::check())
+
+                                @if (Auth::user()->admin)
+                                    
+                                    <div class="card-body">
+
+                                        <ul class="list-group">
+                                        
+                                            <li class="list-group-item">
+                                            <strong> 
+                                                <a href="\channels" style="text-decoration: none">
+                                                <div class="text-center">All Channels</div>
+                                                </a>
+                                            </strong> 
+                                            </li>
+            
+                                        </ul>
+                                        
+
+                                    </div>
+                                    
+
+                                @endif
+
+                            @endif
+                              
 
                         </div>
 
@@ -149,13 +217,35 @@
                 </div>
            
 
-            </div>
-               
-        
-          
-                
+            </div>    
                 
         </main>
     </div>
+
+    {{-- <!-- SCRIPTS --> --}}
+
+    <script src="/js/app.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script>
+         @if(Session::has('success'))
+
+            toastr.success('{{Session::get('success')}}')
+
+         @endif
+    </script>
+
+    <script>
+        @if(Session::has('error'))
+
+           toastr.warning('{{Session::get('error')}}')
+
+        @endif
+   </script>
+
 </body>
 </html>

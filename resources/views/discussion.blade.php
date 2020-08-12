@@ -4,7 +4,7 @@
 
    
             <div class="card">
-                <div class="card-header text-center">Create a new discussion</div>
+                <div class="card-header text-center">Create a new Discussion</div>
 
                 <div class="card-body">
                     
@@ -16,7 +16,7 @@
 
                             <label for="title">Title</label>
 
-                            <input type="text" name="title" id="title" class="form-control">
+                            <input type="text" name="title" id="title" value="{{ old('title') }}" class="form-control">
 
                        </div>
 
@@ -40,7 +40,7 @@
 
                             <label for="discussion">Ask a question</label>
 
-                            <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+                            <textarea name="content" id="content" cols="30" rows="10" class="form-control"> {{ old('content') }}</textarea>
 
                        </div>
 

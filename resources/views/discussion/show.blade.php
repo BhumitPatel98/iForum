@@ -16,6 +16,24 @@
             <a href="{{ route('discussion.watch',$discussion->id) }}" class="btn btn-outline-primary btn-sm float-right" >Watch</a>
                
            @endif
+
+          @if (Auth::id() == $discussion->user->id)
+
+                @if (!$discussion->hasBestAnswer())
+                    <a href="{{ route('discussion.edit',['slug' => $discussion->slug]) }}" class="btn btn-outline-info btn-sm float-right" style="margin-right: 8px; ">Edit</a>
+                @endif
+              
+          @endif
+
+           @if($discussion->hasBestAnswer())
+
+                    <span class="btn btn-outline-danger btn-sm float-right " style="margin-right: 8px;">CLOSE</span> 
+
+                @else
+
+                    <span class="btn btn-outline-success btn-sm float-right " style="margin-right: 8px;">OPEN</span> 
+
+                @endif
            
         </div>
 
@@ -27,7 +45,7 @@
 
            <hr>
            <p class="text-center">
-            {{ $discussion->content }}
+            {!! Markdown::convertToHtml($discussion->content) !!}
            </p>
 
            <hr>
@@ -44,7 +62,7 @@
                     </span>
                    </div>
                    <div class="card-body">
-                       {{ $best_answer->content }}
+                        {!! Markdown::convertToHtml($best_answer->content) !!}  
                    </div>
                </div>
            </div>
@@ -75,16 +93,27 @@
                 
                 @if (!$best_answer)
                     @if (Auth::id() == $discussion->user->id)
-                        <a href="{{ route('discussion.best.answer', $reply->id) }}" class="btn btn-sm btn-info float-right">Mark as Best Answer</a>
+                        <a href="{{ route('discussion.best.answer', $reply->id) }}" class="btn btn-sm btn-info float-right" >Mark as Best Answer</a>
                     @endif
                 @endif
+
+                @if (Auth::id() == $reply->user->id)
+
+                        @if (!$reply->best_answer)
+
+                                <a href="{{ route('reply.edit', $reply->id) }}" class="btn btn-sm btn-info float-right" style="margin-right: 8px;">Edit</a>
+                            
+                        @endif
+                        
+                @endif
+
                 
             </div>
 
             <div class="card-body">
 
             <p class="text-center">
-                {{ $reply->content }}
+                {!! Markdown::convertToHtml($reply->content) !!}
             </p>
 
             </div>
