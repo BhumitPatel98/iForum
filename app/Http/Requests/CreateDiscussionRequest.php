@@ -26,7 +26,7 @@ class CreateDiscussionRequest extends FormRequest
         return [
             'channel_id' => 'required',
             'content' => 'required',
-            'title' => 'required'
+            'title' => 'required|unique:discussions'
         ];
     }
 }

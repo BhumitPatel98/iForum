@@ -19,18 +19,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/discuss', function () {
-    return view('discuss');
+
+
+Auth::routes(['verify' => true]);
+
+
+
+
+
+
+Route::group(['middleware' => 'verified'], function() {
+    Route::resource('discussion', 'DiscussionsController');
+
+    Route::get('/forum',[
+        'uses' => 'ForumsController@index',
+        'as' => 'forum'
+    ]);
+
+    Route::get('/discuss', function () {
+        return view('discuss');
+    });
 });
 
-Auth::routes();
-
-Route::get('/forum',[
-    'uses' => 'ForumsController@index',
-    'as' => 'forum'
-]);
-
-Route::resource('discussion', 'DiscussionsController');
 
 Route::group(['middleware' => ['auth']], function() {
 

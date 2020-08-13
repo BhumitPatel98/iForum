@@ -6,7 +6,7 @@
 
 
   
-        <div class="card  mb-4">
+        <div class="card border-secondary  mb-4">
             <div class="card-header">   
 
                 <img width="40px" height="40px" style="border-radius:50px" src=" {{ Gravatar::src($discussion->email) }}" alt=""> &nbsp;&nbsp;&nbsp;
@@ -54,8 +54,7 @@
     
 @endforeach
 
-<div class="text-center">
-    {{ $discussions->links() }}
-</div>
+
+    {{ $discussions->links() }}  
 
 @endsection
