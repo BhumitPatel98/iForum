@@ -161,11 +161,14 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        
 
         
         /*
          * Package Service Providers...
          */
+
+        Creativeorange\Gravatar\GravatarServiceProvider::class,
 
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
 
@@ -230,7 +233,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
+        'Gravatar' => Creativeorange\Gravatar\Facades\Gravatar::class,
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
 
     ],

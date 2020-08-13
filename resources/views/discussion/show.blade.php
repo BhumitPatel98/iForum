@@ -5,7 +5,7 @@
   
     <div class="card border-secondary  mb-4">
         <div class="card-header">   
-            <img width="40px" height="40px" style="border-radius:50px" src=" {{ Gravatar::src($discussion->email) }}" alt=""> &nbsp;&nbsp;&nbsp;
+            <img width="40px" height="40px" style="border-radius:50px" src=" {{ Gravatar::get($discussion->user->email) }} " alt=""> &nbsp;&nbsp;&nbsp;
             <span>{{ $discussion->user->name}} <b>{{ $discussion->created_at->diffForHumans() }} ({{ $discussion->user->points }})</b></span>
            @if ($discussion->is_beign_watched_by_auth_user())
 
@@ -55,7 +55,7 @@
                <h3 class="text-center">Best Answer</h3>
                <div class="card text-white bg-success mb-3">
                    <div class="card-header">
-                    <img width="40px" height="40px" style="border-radius:50px" src=" {{ Gravatar::src($discussion->email) }}" alt=""> &nbsp;&nbsp;&nbsp;
+                    <img width="40px" height="40px" style="border-radius:50px" src=" {{ Gravatar::get($discussion->user->email) }}" alt=""> &nbsp;&nbsp;&nbsp;
                     <span>
                         {{ $best_answer->user->name}}  
                         <b>({{ $best_answer->user->points }})</b>
@@ -85,7 +85,7 @@
 
         <div class="card my-4">
             <div class="card-header">   
-                <img width="40px" height="40px" style="border-radius:50px" src=" {{ Gravatar::src($discussion->email) }}" alt="" > &nbsp;&nbsp;&nbsp;
+                <img width="40px" height="40px" style="border-radius:50px" src=" {{ Gravatar::get($reply->user->email) }} " alt="" > &nbsp;&nbsp;&nbsp;
                 <span>
                     {{ $reply->user->name}} 
                     <b>{{ $reply->created_at->diffForHumans() }} ({{ $reply->user->points }})</b>

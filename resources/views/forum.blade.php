@@ -9,7 +9,7 @@
         <div class="card border-secondary  mb-4">
             <div class="card-header">   
 
-                <img width="40px" height="40px" style="border-radius:50px" src=" {{ Gravatar::src($discussion->email) }}" alt=""> &nbsp;&nbsp;&nbsp;
+                <img width="40px" height="40px" style="border-radius:50px" src=" {{ Gravatar::get($discussion->user->email) }}" alt=""> &nbsp;&nbsp;&nbsp;
 
                 <span class="ml-2">{{ $discussion->user->name}}, <b>{{ $discussion->created_at->diffForHumans() }}</b></span>
 

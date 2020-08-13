@@ -26,9 +26,10 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+           
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/forum') }}">
-                   iForum
+                    iForum <i class='fab fa-rocketchat' style='font-size:18px'></i>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -191,13 +192,13 @@
 
                         </div>
 
-                        <div class="card">
+                        <div class="card text-white bg-dark">
                             
                             <div class="card-header">
                                 Channels
                             </div>
         
-                            <div class="card-body">
+                            <div class="card-body bg-light ">
                               <ul class="list-group">
                                 @foreach ($channels as $channel)
                                         <li class="list-group-item">
@@ -230,6 +231,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
     <script>
          @if(Session::has('success'))
