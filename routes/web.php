@@ -24,21 +24,15 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 
+Route::resource('discussion', 'DiscussionsController');
 
+Route::get('/forum',[
+    'uses' => 'ForumsController@index',
+    'as' => 'forum'
+]);
 
-
-
-Route::group(['middleware' => 'verified'], function() {
-    Route::resource('discussion', 'DiscussionsController');
-
-    Route::get('/forum',[
-        'uses' => 'ForumsController@index',
-        'as' => 'forum'
-    ]);
-
-    Route::get('/discuss', function () {
-        return view('discuss');
-    });
+Route::get('/discuss', function () {
+    return view('discuss');
 });
 
 

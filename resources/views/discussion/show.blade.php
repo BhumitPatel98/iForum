@@ -55,7 +55,7 @@
                <h3 class="text-center">Best Answer</h3>
                <div class="card text-white bg-success mb-3">
                    <div class="card-header">
-                    <img width="40px" height="40px" style="border-radius:50px" src=" {{ Gravatar::get($discussion->user->email) }}" alt=""> &nbsp;&nbsp;&nbsp;
+                    <img width="40px" height="40px" style="border-radius:50px" src=" {{ Gravatar::get($best_answer->user->email) }}" alt=""> &nbsp;&nbsp;&nbsp;
                     <span>
                         {{ $best_answer->user->name}}  
                         <b>({{ $best_answer->user->points }})</b>
